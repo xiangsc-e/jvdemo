@@ -15,6 +15,7 @@ pipeline {
         stage('SonarQube 分析') {
             steps {
                 script {
+                    def scannerHome = tool 'sonarqube-scanner'
                     def repoName = sh(
                         returnStdout: true,
                         script: 'basename -s .git $(git config --get remote.origin.url)'
@@ -27,7 +28,7 @@ pipeline {
                         if (isPR) {
                             // Pull Request / Merge Request 分析
                             sh """
-                                mvn sonar:sonar \
+                                ${scannerHome}/bin/sonar-scanner \
                                   -Dsonar.projectKey=${repoName} \
                                   -Dsonar.projectName=${repoName} \
                                   -Dsonar.projectVersion=${env.BUILD_NUMBER} \
