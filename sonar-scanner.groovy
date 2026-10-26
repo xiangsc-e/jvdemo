@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQubeScanner 'sonarqube-scanner'
-    }
+    // tools {
+    //     sonarQubeScanner 'sonarqube-scanner'
+    // }
 
     stages {
         stage('拉取代码') {
